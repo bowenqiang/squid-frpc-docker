@@ -4,12 +4,13 @@ services:
     image: liuzheng/squid-frpc:0.42.0
     restart: always
     tty: true
+    #network_mode: "host"
     volumes:
       - ./frpc.ini:/etc/frpc/frpc.ini
       - ./healthcheck.sh:/usr/bin/healthcheck.sh
     entrypoint: ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
     healthcheck:
-      test: ["CMD", "bash", "/usr/bin/healthcheck.sh"]
+      test: ["CMD", "sh", "/usr/bin/healthcheck.sh"]
       interval: 1m30s
       timeout: 10s
       retries: 3
@@ -17,8 +18,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      network: host
       args:
         VERSION: 0.42.0
         ARCH: amd64
-
-

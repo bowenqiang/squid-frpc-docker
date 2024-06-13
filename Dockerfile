@@ -1,7 +1,7 @@
-ARG VERSION ARCH
+ARG VERSION ARCH USER
 FROM alpine as bin
 ARG VERSION ARCH
-ENV VERSION=${VERSION:-0.42.0}  ARCH=${ARCH:-amd64}
+ENV VERSION=${VERSION:-0.42.0}  ARCH=${ARCH:-amd64} USER=${USER}
 #RUN curl -L -o frp.tar.gz https://github.com/fatedier/frp/releases/download/v${VERSION}/frp_${VERSION}_linux_${ARCH}.tar.gz
 RUN wget -O frp.tar.gz https://github.com/fatedier/frp/releases/download/v${VERSION}/frp_${VERSION}_linux_${ARCH}.tar.gz
 RUN tar xzf frp.tar.gz 
